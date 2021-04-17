@@ -1,0 +1,38 @@
+{
+  "categories": {
+    "food": {
+      "amount": 67000,
+      "content": [
+        ["Cold Stone", "17th Apr, 2021", "07:06:27 AM"],
+        ["Pure Bliss Cookies", "16th Apr, 2021", "11:32:17 PM"],
+        ["Waffles & Scrambled Eggs", "17th Apr, 2021", "07:07:14 AM"]
+      ]
+    },
+    "clothing": {
+      "amount": 94500,
+      "content": [
+        ["Nike Air Force 1", "17th Apr, 2021", "07:08:33 AM"],
+        ["Winter Beanie", "17th Apr, 2021", "12:19:46 AM"],
+        ["Black Designers Belt", "17th Apr, 2021", "07:09:25 AM"]
+      ]
+    },
+    "technology": {
+      "amount": 675000,
+      "content": [
+        ["HP Envy 15 X360", "17th Apr, 2021", "11:32:46 AM"],
+        ["AEC BQ618 Smart Wireless Bluetooth Headset", "17th Apr, 2021", "11:34:30 AM"]
+      ]
+    },
+    "entertainment": {
+      "amount": 10000,
+      "content": [
+        ["Netflix Subscription", "17th Apr, 2021", "11:34:58 AM"],
+        ["Funimation Subscription", "17th Apr, 2021", "11:35:11 AM"]
+      ]
+    }
+  },
+  "transfers": [
+    ["Technology", "Food", 50000, "17th Apr, 2021", "11:38:41 AM"],
+    ["Entertainment", "Clothing", 2000, "17th Apr, 2021", "11:46:59 AM"]
+  ]
+}
