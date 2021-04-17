@@ -54,7 +54,7 @@ def getAction():
     i = 1; actions = ['Add Budget', 'Add Category', 'View Categories', 'View Budgets', 'Get Balances', 'Withdraw', 'Deposit', 'Transfer', 'View Transfers', 'About', 'Exit']
     
     if not isFirstAction:
-        print('═' * (len(max(actions, key=len)) + 3));
+        print('═' * (len(max(actions, key=len)) + 3))
     isFirstAction = False
 
     for action in actions:
