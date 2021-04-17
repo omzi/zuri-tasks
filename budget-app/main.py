@@ -265,14 +265,14 @@ def about():
     print(f'{Style.BOLD}{Style.COLOR_BLUE}\n© 2021, Oʍʐɨ \n{Style.ENDF}')
 
 
-def exit():
+def exit(budget):
     while True:
         option = input(f'{Style.BOLDITALIC}{Style.COLOR_RED}Are you sure you want to exit? ([Y]es / [N]o){Style.ENDF}\n')
 
         if option.upper() == 'Y':
             break
         elif option.upper() == 'N':
-            break
+            showActions(budget)
         else:
             print('\nInvalid option. Reply Y for Yes & N for No')
     print('Hope you had a nice experience with Budgeteer! Have a nice day :)')
@@ -301,7 +301,7 @@ def showActions(data):
     elif action == 10:
         about(); showActions(data)
     elif action == 11:
-        exit()
+        exit(data)
 
 
 def app():
