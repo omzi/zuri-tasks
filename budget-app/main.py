@@ -1,5 +1,6 @@
 # I've tried sticking to PEP 8 guidelines but... camelCase rules🤘!
 import os
+import re
 from time import sleep
 import simplejson as json
 from tabulate import tabulate
@@ -40,7 +41,7 @@ def stringCheck(budget, string, stringInput, stringEmpty, stringNonExistent):
     while True:
         string = styledInput(stringInput, budget)
 
-        if not len(string):
+        if not len(string) or re.match(r'\s', string):
             printMessage('error', f'Error: {stringEmpty}')
             continue
         if not budget.check_category(string):
@@ -107,8 +108,8 @@ def addBudget(budget):
 
     while True:
         description = styledInput('Enter its description', budget)
-        if not len(category):
-            printMessage('error', 'Error: Category cannot be empty!')
+        if not len(description) or re.match(r'\s', description):
+            printMessage('error', 'Error: Description cannot be empty!')
             continue
         break
 
@@ -123,7 +124,7 @@ def addCategory(budget):
 
     while True:
         category = styledInput('Enter the category name', budget)
-        if not len(category):
+        if not len(category) or re.match(r'\s', category):
             printMessage('error', 'Error: Category cannot be empty!')
             continue
         if budget.check_category(category):
@@ -162,15 +163,13 @@ def viewBudgets(budget):
 
 def getBalances(budget):
     # 5. Get Balances
-    # TODO: Add an addComma() function to format the balances before printing
     print(f'{Style.BOLD}{Style.COLOR_BLUE}✱ Balances ✱{Style.ENDF}')
     newData = budget.data['categories'].items()
     categories = [data[-0].capitalize() for data in newData]
     balances = [data['amount'] for data in [data[-1] for data in newData]]
     balancesFormatted = ["{:,}".format(balance) for balance in balances]
-    total = sum(balances)
 
-    tableData = list(zip([*categories, f'{Style.BOLD}TOTAL{Style.ENDF}'], [*balancesFormatted, f'₦{"{:,}".format(total)}']))
+    tableData = list(zip([*categories, f'{Style.BOLD}TOTAL{Style.ENDF}'], [*balancesFormatted, f'₦{"{:,}".format(sum(balances))}']))
     tableHeaders = [f'{Style.BOLDITALIC}Category{Style.ENDF}', f'{Style.BOLDITALIC}Balance{Style.ENDF}']
     
     print(tabulate(tableData, tableHeaders, tablefmt='fancy_grid'))
