@@ -7,38 +7,51 @@ def ordinal(n: int) -> str:
 
 
 class Budget:
+    '''
+    Contains all data and methods for manipulating instances of the 'Budget' class
+    '''
     def __init__(self, data):
         self.data = data
         self.categories = list(data['categories'])
         self.transfers = data['transfers']
     
     def check_category(self, category: str) -> bool:
+        '''
+        Checks if a budget category is existent
+        '''
         return category.lower() in list(map(str.lower, self.categories))
 
     def add_category(self, category: str):
+        '''
+        Adds a new category to an instance of the Budget class
+        '''
         self.categories.append(category)
         self.data['categories'][category] = { 'amount': 0, 'content': [] }
     
     def add_budget(self, category: str, description: str):
-        if not self.check_category(category):
-            print('Error: Category does not exists! Create the category first.')
-            return False
-        else:
-            current_datetime = datetime.now()
-            date_added = current_datetime.strftime('{d} %b, %Y').replace("{d}", ordinal(current_datetime.day))
-            time_added = current_datetime.strftime('%I:%M:%S %p')
+        '''
+        Adds a budget to an existing category
+        '''
+        current_datetime = datetime.now()
+        date_added = current_datetime.strftime('{d} %b, %Y').replace("{d}", ordinal(current_datetime.day))
+        time_added = current_datetime.strftime('%I:%M:%S %p')
 
-            self.data['categories'][category]['content'].append([description, date_added, time_added])
-            return True
+        self.data['categories'][category]['content'].append([description, date_added, time_added])
     
-    def deposit(self, category: str, amount: int):
+    def deposit(self, category: str, amount: int) -> bool:
+        '''
+        Adds a specified amount to an existing budget category
+        '''
         if amount > 0:
             self.data['categories'][category]['amount'] += amount
             return True
         else:
             return False
 
-    def withdraw(self, category: str, amount: int):
+    def withdraw(self, category: str, amount: int) -> bool:
+        '''
+        Deducts a specified amount from an existing budget category
+        '''
         if 0 < amount <= self.data['categories'][category]['amount']:
             self.data['categories'][category]['amount'] -= amount
             return True
@@ -46,6 +59,9 @@ class Budget:
             return False
     
     def transfer(self, source: str, amount: int, destination: str):
+        '''
+        Transfers funds between existing categories
+        '''
         self.data['categories'][source]['amount'] -= amount
         self.data['categories'][destination]['amount'] += amount
 
